@@ -3,11 +3,11 @@ import time
 device = "cuda:0" # the device to load the model onto
 
 model = AutoModelForCausalLM.from_pretrained(
-    "/home/agent_mxz/models/Qwen1.5-14B-Chat",
+    "/mnt/sda/agent_mxz/models/Qwen1.5-14B-Chat",
     torch_dtype="auto",
     device_map="auto"
 )
-tokenizer = AutoTokenizer.from_pretrained("/home/agent_mxz/models/Qwen1.5-14B-Chat")
+tokenizer = AutoTokenizer.from_pretrained("/mnt/sda/agent_mxz/models/Qwen1.5-14B-Chat")
 
 prompt = "你好"
 

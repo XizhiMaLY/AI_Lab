@@ -1,0 +1,32 @@
+       
+    1: from transformers import AutoTokenizer, Qwen2ForCausalLM
+    1: import os
+    1: os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+    1: import torch
+       
+       # Model and tokenizer paths
+    1: model_path = "/mnt/sda/agent_mxz/models/Qwen2-7B-Instruct"
+    1: tokenizer = AutoTokenizer.from_pretrained(model_path)
+    1: model = Qwen2ForCausalLM.from_pretrained(model_path)
+       
+       # Input texts
+    1: texts = ["Replace me by any text you'd like.", "Hello, this is", "Write a story for me.", "I love", "你", "12345"]
+       
+       # Ensure padding is done on the left
+    1: tokenizer.padding_side = "left"
+       
+       # Define PAD Token = EOS Token
+    1: tokenizer.pad_token = tokenizer.eos_token
+    1: model.config.pad_token_id = model.config.eos_token_id
+    1: model.config.do_sample = False
+    1: model.config._attn_implementation = "eager"
+       
+       # Tokenize the inputs with padding
+    1: encoded_inputs = tokenizer(texts, return_tensors='pt', padding=True, truncation=True)
+    1: print(encoded_inputs)
+       # Get model output
+    1: outputs = model(**encoded_inputs)
+       # outputs1 = model.generate()
+       # Print the outputs
+       # print(outputs[0][1])
+    1: print(tokenizer.batch_decode(torch.argmax(outputs[0], dim=-1)))

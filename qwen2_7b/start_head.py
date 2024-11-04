@@ -1,14 +1,14 @@
 
 from transformers import AutoTokenizer, Qwen2ForCausalLM
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 # print(os.environ['sdpa']=='False')
 import torch
 
 # Model and tokenizer paths
 model_path = "/mnt/sda/agent_mxz/models/Qwen2-7B-Instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = Qwen2ForCausalLM.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained(model_path, torch_dtype=torch.bfloat16)
+model = Qwen2ForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16)
 
 # Input texts
 texts = ["Replace me by any text you'd like.", "Hello, this is", "Write a story for me.", "I love", "你", "12345"]

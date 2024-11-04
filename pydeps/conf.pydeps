@@ -1,0 +1,11 @@
+[pydeps]
+max_bacon = 2   # 排除距离超过 n 跳的节点（默认=2, 0 -> 无限）
+verbose = 0    # 信息输出
+pylib = False  # 是否包含 python std lib 模块
+
+exclude =   # 排除模块(不在途中话出)
+    os
+    re
+    sys
+    collections
+    __future__
